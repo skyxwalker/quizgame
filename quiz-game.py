@@ -95,7 +95,13 @@ class FinalQuizGame:
         self.current_question += 1
         self.load_question()
 
-    
+    def show_result(self):
+        percentage = (self.score / len(self.questions)) * 100
+        result_text = f"Quiz completed!\nYour score: {self.score}/{len(self.questions)}\nPercentage: {percentage:.2f}%"
+        self.question_label.config(text=result_text)
+        for button in self.option_buttons:
+            button.grid_remove()
+        self.button_frame.grid_remove()
 
 if __name__ == "__main__":
     root = tk.Tk()

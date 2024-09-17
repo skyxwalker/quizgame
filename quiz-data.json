@@ -18,5 +18,55 @@
     "question": "Who wrote 'Romeo and Juliet'?",
     "options": ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"],
     "correct_answer": "William Shakespeare"
+  },
+  {
+    "question": "What is the largest ocean on Earth?",
+    "options": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+    "correct_answer": "Pacific Ocean"
+  },
+  {
+    "question": "Which element has the chemical symbol 'O'?",
+    "options": ["Gold", "Oxygen", "Iron", "Silver"],
+    "correct_answer": "Oxygen"
+  },
+  {
+    "question": "In which year did World War II end?",
+    "options": ["1943", "1945", "1947", "1950"],
+    "correct_answer": "1945"
+  },
+  {
+    "question": "What is the capital of Japan?",
+    "options": ["Beijing", "Seoul", "Tokyo", "Bangkok"],
+    "correct_answer": "Tokyo"
+  },
+  {
+    "question": "Who painted the Mona Lisa?",
+    "options": ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"],
+    "correct_answer": "Leonardo da Vinci"
+  },
+  {
+    "question": "What is the largest mammal in the world?",
+    "options": ["African Elephant", "Blue Whale", "Giraffe", "Hippopotamus"],
+    "correct_answer": "Blue Whale"
+  },
+  {
+    "question": "Which country is home to the Great Barrier Reef?",
+    "options": ["Brazil", "Australia", "Indonesia", "Mexico"],
+    "correct_answer": "Australia"
+  },
+  {
+    "question": "What is the currency of the United Kingdom?",
+    "options": ["Euro", "Dollar", "Pound Sterling", "Yen"],
+    "correct_answer": "Pound Sterling"
+  },
+  {
+    "question": "Who was the first person to step on the Moon?",
+    "options": ["Buzz Aldrin", "Yuri Gagarin", "Neil Armstrong", "John Glenn"],
+    "correct_answer": "Neil Armstrong"
+  },
+  {
+    "question": "What is the largest desert in the world?",
+    "options": ["Gobi Desert", "Sahara Desert", "Arabian Desert", "Antarctic Desert"],
+    "correct_answer": "Antarctic Desert"
   }
 ]

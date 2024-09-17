@@ -16,7 +16,28 @@ class FinalQuizGame:
         self.style.configure('TRadiobutton', background='#f0f0f0', font=('Arial', 10))
         self.style.configure('TLabel', background='#f0f0f0', font=('Arial', 10))
 
-       
+        self.questions = [
+            {
+                "question": "What is the capital of France?",
+                "options": ["London", "Berlin", "Paris", "Madrid"],
+                "correct_answer": "Paris"
+            },
+            {
+                "question": "Which planet is known as the Red Planet?",
+                "options": ["Mars", "Jupiter", "Venus", "Saturn"],
+                "correct_answer": "Mars"
+            },
+            {
+                "question": "What is 2 + 2?",
+                "options": ["3", "4", "5", "6"],
+                "correct_answer": "4"
+            },
+            {
+                "question": "Who wrote 'Romeo and Juliet'?",
+                "options": ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"],
+                "correct_answer": "William Shakespeare"
+            }
+        ]
 
         self.score = 0
         self.current_question = 0
@@ -74,13 +95,7 @@ class FinalQuizGame:
         self.current_question += 1
         self.load_question()
 
-    def show_result(self):
-        percentage = (self.score / len(self.questions)) * 100
-        result_text = f"Quiz completed!\nYour score: {self.score}/{len(self.questions)}\nPercentage: {percentage:.2f}%"
-        self.question_label.config(text=result_text)
-        for button in self.option_buttons:
-            button.grid_remove()
-        self.button_frame.grid_remove()
+    
 
 if __name__ == "__main__":
     root = tk.Tk()

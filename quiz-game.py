@@ -1,10 +1,11 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 import json
 import random
+import os
 
 class FlexibleQuizGame:
-    def __init__(self, master, quiz_file):
+    def __init__(self, master):
         self.master = master
         self.master.title("Python Quiz")
         self.master.geometry("500x400")
@@ -17,16 +18,12 @@ class FlexibleQuizGame:
         self.style.configure('TRadiobutton', background='#f0f0f0', font=('Arial', 10))
         self.style.configure('TLabel', background='#f0f0f0', font=('Arial', 10))
 
-        self.questions = self.load_questions(quiz_file)
+        self.questions = []
         self.score = 0
         self.current_question = 0
 
         self.create_widgets()
-        self.load_question()
-
-    def load_questions(self, file_path):
-        with open(file_path, 'r') as file:
-            return json.load(file)
+        self.load_quiz_file()
 
     def create_widgets(self):
         self.main_frame = ttk.Frame(self.master, padding="20")
@@ -52,6 +49,22 @@ class FlexibleQuizGame:
 
         self.main_frame.columnconfigure(0, weight=1)
         self.main_frame.columnconfigure(1, weight=0)
+
+    def load_quiz_file(self):
+        file_path = os.path.join(os.path.dirname(__file__), "quiz-data.json")
+        try:
+            with open(file_path, 'r') as file:
+                self.questions = json.load(file)
+            self.load_question()
+        except FileNotFoundError:
+            messagebox.showerror("Error", f"The file 'quiz-data.json' was not found in the script's directory.")
+            self.master.quit()
+        except json.JSONDecodeError:
+            messagebox.showerror("Invalid File", f"The file 'quiz-data.json' is not a valid JSON file.")
+            self.master.quit()
+        except Exception as e:
+            messagebox.showerror("Error", f"An error occurred while reading the file: {str(e)}")
+            self.master.quit()
 
     def load_question(self):
         if self.current_question < len(self.questions):
@@ -87,5 +100,5 @@ class FlexibleQuizGame:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    quiz_game = FlexibleQuizGame(root, "quiz_data.json")
+    quiz_game = FlexibleQuizGame(root)
     root.mainloop()

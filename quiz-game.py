@@ -1,9 +1,10 @@
 import tkinter as tk
 from tkinter import ttk
+import json
 import random
 
-class FinalQuizGame:
-    def __init__(self, master):
+class FlexibleQuizGame:
+    def __init__(self, master, quiz_file):
         self.master = master
         self.master.title("Python Quiz")
         self.master.geometry("500x400")
@@ -16,34 +17,16 @@ class FinalQuizGame:
         self.style.configure('TRadiobutton', background='#f0f0f0', font=('Arial', 10))
         self.style.configure('TLabel', background='#f0f0f0', font=('Arial', 10))
 
-        self.questions = [
-            {
-                "question": "What is the capital of France?",
-                "options": ["London", "Berlin", "Paris", "Madrid"],
-                "correct_answer": "Paris"
-            },
-            {
-                "question": "Which planet is known as the Red Planet?",
-                "options": ["Mars", "Jupiter", "Venus", "Saturn"],
-                "correct_answer": "Mars"
-            },
-            {
-                "question": "What is 2 + 2?",
-                "options": ["3", "4", "5", "6"],
-                "correct_answer": "4"
-            },
-            {
-                "question": "Who wrote 'Romeo and Juliet'?",
-                "options": ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"],
-                "correct_answer": "William Shakespeare"
-            }
-        ]
-
+        self.questions = self.load_questions(quiz_file)
         self.score = 0
         self.current_question = 0
 
         self.create_widgets()
         self.load_question()
+
+    def load_questions(self, file_path):
+        with open(file_path, 'r') as file:
+            return json.load(file)
 
     def create_widgets(self):
         self.main_frame = ttk.Frame(self.master, padding="20")
@@ -56,19 +39,17 @@ class FinalQuizGame:
 
         self.var = tk.StringVar()
         self.option_buttons = []
-        for i in range(4):
+        for i in range(4):  # Assuming all questions have 4 options
             button = ttk.Radiobutton(self.main_frame, text="", variable=self.var, value="")
             button.grid(row=i+1, column=0, columnspan=2, sticky=tk.W, pady=5)
             self.option_buttons.append(button)
 
-        # Create a frame for the submit button to keep it on the right
         self.button_frame = ttk.Frame(self.main_frame)
         self.button_frame.grid(row=5, column=0, columnspan=2, sticky=tk.E, pady=20)
 
         self.submit_button = ttk.Button(self.button_frame, text="Submit", command=self.check_answer)
         self.submit_button.pack(side=tk.RIGHT)
 
-        # Configure column weights
         self.main_frame.columnconfigure(0, weight=1)
         self.main_frame.columnconfigure(1, weight=0)
 
@@ -76,8 +57,9 @@ class FinalQuizGame:
         if self.current_question < len(self.questions):
             question = self.questions[self.current_question]
             self.question_label.config(text=question["question"])
-            random.shuffle(question["options"])
-            for i, option in enumerate(question["options"]):
+            options = question["options"]
+            random.shuffle(options)
+            for i, option in enumerate(options):
                 self.option_buttons[i].config(text=option, value=option)
             self.var.set(None)
             self.submit_button.config(state=tk.NORMAL)
@@ -105,5 +87,5 @@ class FinalQuizGame:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    quiz_game = FinalQuizGame(root)
+    quiz_game = FlexibleQuizGame(root, "quiz_data.json")
     root.mainloop()
